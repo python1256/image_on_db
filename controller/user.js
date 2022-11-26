@@ -9,16 +9,16 @@ const Image_store=require("../model/image_model");
 
 
 
-const Storage=multer.diskStorage({
-    destination:function(req,file,cb){cb(null,path.join(__dirname, '../uploads'));},
-    filename:(req,file,cb)=>{
+const storage=multer.diskStorage({
+    destination:function(req,file,cb){cb(null,'./uploads');},
+    filename:function(req,file,cb){
        cb(null,file.originalname);
-    },
+    }
 });
 
 
 const upload=multer({
-    storage:Storage,
+    storage:storage,
 }).single('testimage');
 
 router.get('/show_image',(req,res)=>{
@@ -51,11 +51,7 @@ router.post("/upload_Image",(req,res)=>{
         else{
             const newimage=new Image_store({
                 name:req.body.name,
-                image:{
-                    data:req.file.filename,
-                    contentType:'image/png'
-                } 
-
+                image:req.file.path
             })
             console.log(newimage);
             newimage.save().then(()=>{

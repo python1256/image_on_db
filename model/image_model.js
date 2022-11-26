@@ -4,8 +4,7 @@ const Imageschema = new mongoose.Schema({
       typeof:String,
    },
    image:{
-    data:Buffer,
-    contentType:String
+      type:String
    }
 })
 const Image_store=new mongoose.model('Image_store',Imageschema);
