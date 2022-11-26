@@ -10,11 +10,12 @@ const Image_store=require("../model/image_model");
 
 
 const Storage=multer.diskStorage({
-    destination:function(req,file,cb){cb(null,'./uploads');},
+    destination:function(req,file,cb){cb(null,path.join(__dirname, './uploads'));},
     filename:(req,file,cb)=>{
        cb(null,file.originalname);
     },
 });
+
 
 const upload=multer({
     storage:Storage,
