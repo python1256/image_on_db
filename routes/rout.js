@@ -36,6 +36,7 @@ router.post("/update_img",control.uploadImg,async(req,res)=>{
         image:req.body.path,
     });
     imageup.save().then(()=>{
+        
         res.send("uploaded");
     }).catch((error)=>{
         res.send(error)
