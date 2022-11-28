@@ -29,5 +29,16 @@ router.get("/show_by_id/:id",async(req,res)=>{
         res.status(400).send(err);
     }
 })
-router.post("/update_img",control.uploadImg,control.imageup);
+router.post("/update_img",control.uploadImg,async(req,res)=>{
+    const imageup = new Image_store({
+
+        name:req.body.name,
+        image:req.body.path,
+    });
+    imageup.save().then(()=>{
+        res.send("uploaded");
+    }).catch((error)=>{
+        res.send(error)
+    });
+});
 module.exports=router;
