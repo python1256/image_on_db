@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:false}));
-const routes = require("./controller/user");
+const routes = require("./routes/rout");
 app.use('/', routes)
 
 app.listen(PORT,host,()=>

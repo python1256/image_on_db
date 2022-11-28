@@ -5,21 +5,8 @@ const multer = require('multer');
 const { error } = require("console");
 const app=express();
 const router = express.Router();
-const Image_store=require("../model/image_model");
+const upload=multer();
 
-
-
-const storage=multer.diskStorage({
-    destination:function(req,file,cb){cb(null,'./uploads');},
-    filename:function(req,file,cb){
-       cb(null,file.originalname);
-    }
-});
-
-
-const upload=multer({
-    storage:storage,
-}).single('testimage');
 
 router.get('/show_image',(req,res)=>{
     Image_store.find({},(err,Items)=>{
