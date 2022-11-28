@@ -6,6 +6,7 @@ const { error } = require("console");
 const app=express();
 const router = express.Router();
 const upload=multer();
+const control=require("../controller/uploder");
 
 
 router.get('/show_image',(req,res)=>{
@@ -28,26 +29,5 @@ router.get("/show_by_id/:id",async(req,res)=>{
         res.status(400).send(err);
     }
 })
-
-router.post("/upload_Image",(req,res)=>{
-    console.log("hello");
-    upload(req,res,(err)=>{
-        if(err){
-            console.log(err,"error");
-        }
-        else{
-            const newimage=new Image_store({
-                name:req.body.name,
-                image:req.file.path
-            })
-            console.log(newimage);
-            newimage.save().then(()=>{
-                res.status(201).send("sucessfully upload");
-                //just need to change send to render and mention the home page
-            }).catch((err)=>{
-            res.status(400).send(err);
-            })
-        }
-    })
-});
+router.post("/update_img",control.uploadImg,control.imageup);
 module.exports=router;
