@@ -20,10 +20,4 @@ const uploadImg=multer({
     storage:storage,
 }).single('image');
 
-const imageup = new Image_store({
-
-    name:req.body.name,
-    image:req.body.path,
-})
-
-module.exports={uploadImg,imageup};
+module.exports={uploadImg};
